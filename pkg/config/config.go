@@ -23,6 +23,7 @@ type Config struct {
 	ServerPort string   `json:"serverPort"`
 	BaseURL    string   `json:"baseUrl"`
 	AllowedIPs []string `json:"allowedIPs"`
+	OpenAiToken string `json:"openAiToken"`
 }
 
 var AppConfig Config

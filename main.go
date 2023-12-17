@@ -21,7 +21,7 @@ import (
 func rootRouteHandler(w http.ResponseWriter, r *http.Request) {
 	switch r.Method {
 	case "GET":
-		handlers.GetAllPublishedRiddles(w, r)
+		handlers.GetAllRiddlesHandler(w, r)
 	case "POST":
 		handlers.PostRiddleHandler(w, r)
 	default:
@@ -38,6 +38,17 @@ func singleRiddleHandler(allowedIPs []string) http.HandlerFunc {
 			middleware.IPWhitelistMiddleware(http.HandlerFunc(handlers.DeleteRiddleHandler), allowedIPs).ServeHTTP(w, r)
 		case "PATCH":
 			middleware.IPWhitelistMiddleware(http.HandlerFunc(handlers.PatchRiddleHandler), allowedIPs).ServeHTTP(w, r)
+		default:
+			http.Error(w, "Method not allowed", http.StatusMethodNotAllowed)
+		}
+	}
+}
+
+func generateImage(allowedIPS []string) http.HandlerFunc{
+	return func(w http.ResponseWriter, r *http.Request) {
+		switch r.Method {
+		case "GET":
+			middleware.IPWhitelistMiddleware(http.HandlerFunc(handlers.GenerateImageHandler), allowedIPS).ServeHTTP(w, r)	
 		default:
 			http.Error(w, "Method not allowed", http.StatusMethodNotAllowed)
 		}
@@ -62,6 +73,10 @@ func main() {
 	// GET, DELETE, PATCH single riddle by id
 	// DELETE and PATCH methods are IP-protected
 	http.HandleFunc("/api/riddles/", singleRiddleHandler(allowedIPs))
+
+	// DALLE
+	// http.HandleFunc("/api/riddles/image/", handlers.GenerateImageHandler)
+	http.HandleFunc("/api/riddles/image/", generateImage(allowedIPs))
 
 	fs := http.FileServer(http.Dir("templates"))
 	http.Handle("/static/", http.StripPrefix("/static/", fs))

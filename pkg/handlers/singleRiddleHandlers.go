@@ -15,7 +15,7 @@ import (
 )
 
 func GetRiddleByIdHandler(w http.ResponseWriter, r *http.Request) {
-	logger.Log.Info("Executing GetRiddleBtIdHandler")
+	logger.Log.Info("Executing GetRiddleByIdHandler")
 
 	path := r.URL.Path
 	parts := strings.Split(path, "/")
@@ -48,7 +48,7 @@ func GetRiddleByIdHandler(w http.ResponseWriter, r *http.Request) {
 		logger.Log.WithFields(logrus.Fields{
 			"id":      id,
 			"error":   err,
-			"handler": "GetRiddleBtIdHandler",
+			"handler": "GetRiddleByIdHandler",
 		}).Error("Error scanning riddles table rows")
 		http.Error(w, "Riddle not found", http.StatusNotFound)
 		return

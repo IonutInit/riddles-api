@@ -12,15 +12,15 @@ import (
 	"github.com/ionutinit/riddles-api/pkg/logger"
 )
 
-func GetAllPublishedRiddles(w http.ResponseWriter, r *http.Request) {
-	logger.Log.Info("Executing GetAllPublishedRiddles")
+func GetAllRiddlesHandler(w http.ResponseWriter, r *http.Request) {
+	logger.Log.Info("Executing GetAllRiddlesHandler")
 	database := db.GetDB()
 
 	rows, err := database.Query("SELECT id, riddle, solution, synonyms FROM riddles WHERE published = TRUE")
 	if err != nil {
 		logger.Log.WithFields(logrus.Fields{
 			"error":   err,
-			"handler": "GetAllPublishedRiddles",
+			"handler": "GetAllRiddlesHandler",
 		})
 		http.Error(w, "Internal server error", http.StatusInternalServerError)
 		return
@@ -33,7 +33,7 @@ func GetAllPublishedRiddles(w http.ResponseWriter, r *http.Request) {
 		if err := rows.Scan(&rdl.ID, &rdl.Riddle, &rdl.Solution, &rdl.Synonyms); err != nil {
 			logger.Log.WithFields(logrus.Fields{
 				"error":   err,
-				"handler": "GetAllPublishedRiddles",
+				"handler": "GetAllRiddlesHandler",
 			}).Error("Error scanning riddles table rows")
 			http.Error(w, err.Error(), http.StatusInternalServerError)
 			return
@@ -59,7 +59,7 @@ func GetAllPublishedRiddles(w http.ResponseWriter, r *http.Request) {
 
 	logger.Log.WithFields(logrus.Fields{
 		"count": len(riddles),
-	}).Info("Successful query for GetAllPublishedRiddles")
+	}).Info("Successful query for GetAllRiddlesHandler")
 
 	w.Header().Set("Content-Type", "application/json")
 	json.NewEncoder(w).Encode(riddlesResponse)

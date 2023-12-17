@@ -40,14 +40,14 @@
     </script>
 
     
-    <br></br>
+    <br>
     <h3>Available methods</h3>
     <div class="table-container">
         <table class="main-table">
         <thead>
           <tr>
             <th>Operation</th>
-            <th>URI</th>
+            <th>URL</th>
             <th>Method</th>
             <th>Status</th>
             <th>Status Code</th>
@@ -220,11 +220,11 @@
     Update riddle
     <span class="tooltip">[?]
       <span class="tooltiptext">
-        request body: {<br>
-        &nbsp;&nbsp;"riddle": "hello again",<br>
-        &nbsp;&nbsp;"solution": "he he merry christmas",<br>
-        &nbsp;&nbsp;"username": "username", //optional<br>
-        &nbsp;&nbsp;"user_email": "me@email.com" //optional<br>
+        request body example: {<br>
+        &nbsp;&nbsp;"riddle": "What am I?",<br>
+        &nbsp;&nbsp;"solution": "riddle",<br>
+        &nbsp;&nbsp;"username": "mr smith", //optional<br>
+        &nbsp;&nbsp;"user_email": "mr@smith.com" //optional<br>
         }
       </span>
     </span>
@@ -274,7 +274,78 @@
         </tbody>
       </table>
     </div>
-    <br></br>
+    <br>
+
+  <h3>Special Methods</h3>
+  <div class="table-container">
+    <table class="main-table">
+         <thead>
+          <tr>
+            <th>Operation</th>
+            <th>URL</th>
+            <th>Method</th>
+            <th>Status</th>
+            <th>Status Code</th>
+            <th>Availability</th>
+          </tr>
+        </thead>
+       <td rowspan="2">
+    Riddle with DALLE generated image
+    <span class="tooltip">[?]
+      <span class="tooltiptext">
+      Generates an image with the riddle as a prompt, and returns the riddle together with the image url. In the backend, it retrieves the image and stores it an image table.
+      <br>
+      <br>
+        optional request body for additions to the prompt: 
+        <br>
+        {"style": "impressionist"}
+      </span>
+    </span>
+  </td>
+  <td>https://riddles.i-co.xyz/api/riddles/images/{id}</td>
+  <td>GET</td>
+  <td>
+      <table>
+          <tr>
+            <td>OK</td>
+          </tr>
+          <tr>
+            <td>Bad Request</td>
+          </tr>
+          <tr>
+              <td>Not Found</td>
+            </tr>
+           <tr>
+              <td>Internal Server Error</td>
+            </tr>
+           <tr>
+              <td>Forbidden</td>
+            </tr>
+        </table>
+  </td>
+  <td>
+      <table>
+          <tr>
+            <td>200</td>
+          </tr>
+          <tr>
+            <td>400</td>
+          </tr>
+          <tr>
+              <td>404</td>
+            </tr>
+            <tr>
+              <td>500</td>
+            </tr>
+            <tr>
+              <td>403</td>
+            </tr>
+        </table>
+  </td>
+  <td>restricted</td>
+        </tbody>
+    </table>
+  </div>
 
  
 <h4>See it on <a href="https://github.com/IonutInit/riddles-api" target="_blank">GitHub</a></h4>
