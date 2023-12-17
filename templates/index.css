@@ -1,0 +1,95 @@
+body {
+    text-align: center;
+    display: flex;
+    flex-direction: column;  
+    align-items: center;     
+}
+
+.table-container {
+    width: 900px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th, td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+th {
+    background-color: #f2f2f2;
+}
+tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+.main-table tr:nth-child(even) table tr {
+    background-color: #f2f2f2;
+}
+
+.description {
+    text-align: left;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 800px; 
+}
+
+a {
+    text-decoration: none;
+}
+
+.button-container {
+    padding-bottom: 20px;
+}
+
+button {
+    width: 200px;
+    height: 30px;
+    margin: 0px 5px;
+}
+
+.divider {
+    height: 3px;
+    width: 800px;
+    background-color: black;
+}
+
+.divider2 {
+    height: 2px;
+    width: 750px;
+    background-color: black;
+}
+
+.riddle-button {
+    margin-top: 20px; 
+    margin-bottom: 10px;
+}
+
+.tooltip {
+    position: relative;
+    display: inline-block;
+    border-bottom: 1px dotted black;
+    cursor: pointer;
+}
+
+.tooltip .tooltiptext {
+    visibility: hidden;
+    width: 300px;
+    background-color: black;
+    color: #fff;
+    text-align: left;
+    border-radius: 6px;
+    padding: 5px;
+    position: absolute;
+    z-index: 1;
+    bottom: 100%;
+    left: 50%;
+    margin-left: -150px;
+}
+
+.tooltip:hover .tooltiptext {
+    visibility: visible;
+}
